@@ -11,7 +11,7 @@ Redo examples of course Dynamic Programming at [freeCodeCamp](https://youtu.be/o
 > Coderbyte is one of the top websites for technical interview prep and
 > coding challenges.
 
-## Part 1. Memoization
+## Part 1. Memorization
 
 ### Fibonacci problem
 > Write a function `fib(n)` that takes in a number as an argument. The function should return the n-th number of the Fibonacci sequence.
