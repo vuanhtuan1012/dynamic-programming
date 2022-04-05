@@ -46,7 +46,7 @@ def fib(n: int, memo: Optional[dict] = dict()) -> int:
 - Space complexity: O(n)
 
 #### Resources
-- Code: [fib_memoization.py](fib_memoization.py)
+- Code: [fib_memorization.py](fib_memorization.py)
 - Unit tests: [tests/fib.py](tests/fib.py). To run tests, in the root directory use the command below
 ```sh
 python -m unittest -v tests.fib
