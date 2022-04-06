@@ -47,10 +47,15 @@ def fib(n: int, memo: Optional[dict] = dict()) -> int:
 
 #### Resources
 - Code: [fib_memorization.py](fib_memorization.py)
-- Unit tests: [tests/fib.py](tests/fib.py). To run tests, in the root directory use the command below
+- Unit tests: [tests/test_fib.py](tests/test_fib.py). To run tests, in the root directory use one of these commands below
 ```sh
-python -m unittest -v tests.fib
+pytest -v tests/test_fib.py
+python -m unittest -v tests.test_fib
+python -m pytest -v tests/test_fib.py
 ```
+
+### gridTraveler problem
+:soon:
 
 ## Part 2. Tabulation
 :soon:
@@ -59,3 +64,7 @@ python -m unittest -v tests.fib
 - **Dynamic programming:** decompose a large instance of problem into smaller instance of the same problem. Then we have an overlapping structure.
 - **Memorization:** one of the overarching strategies we can use to solve any dynamic programming problem.
 - **Tabulation:** :soon:
+
+## :warning: Note
+- The directory `tests`  must have file `__init__.py` to call command `pytest -v tests/[filename].py`. If not, you have to call command `python -m pytest -v tests/[filename].py`.
+- The difference between `pytest` and `python -m pytest` is the later adds current directory to `sys.path`.
