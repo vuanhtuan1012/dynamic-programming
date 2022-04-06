@@ -3,10 +3,10 @@
 # @Date:   2022-04-04 22:03:48
 # @Email:  anh-tuan.vu@outlook.com
 # @Last Modified by:   anh-tuan.vu
-# @Last Modified time: 2022-04-05 06:50:25
+# @Last Modified time: 2022-04-06 03:37:10
 
 import unittest
-from fib_memoization import fib
+from fib_memorization import fib
 
 
 class Fibonacci(unittest.TestCase):
