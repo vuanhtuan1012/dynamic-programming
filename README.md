@@ -55,7 +55,49 @@ python -m pytest -v tests/test_fib.py
 ```
 
 ### gridTraveler problem
-:soon:
+> Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
+> In how many ways can you travel to the goal on a grid with dimensions m*n ?
+> Write a function `gridTraveler(m, n)`  that calculates this.
+
+#### Brute force gridTraveler recursive function
+```python
+def gridTraveler(m: int, n: int) -> int:
+    if (m <= 0) or (n <= 0):
+        return 0
+    if (m == 1) and (n == 1):
+        return 1
+    return gridTraveler(m-1, n) + gridTraveler(m, n-1)
+```
+- Time complexity: O(2<sup>n+m</sup>)
+- Space complexity: O(n+m)
+
+#### gridTraveler memorized recursive function
+```python
+def gridTraveler(m: int, n: int,
+                 memo: Optional[dict] = dict()) -> int:
+    key = f'{m},{n}'
+    if key in memo:
+        return memo[key]
+    if (m <= 0) or (n <= 0):
+        return 0
+    if (m == 1) or (n == 1):
+        return 1
+    memo[key] = gridTraveler(m-1, n, memo) + gridTraveler(m, n-1, memo)
+    if m != n:
+        memo[f'{n},{m}'] = memo[key]
+    return memo[key]
+```
+- Time complexity: O(n*m)
+- Space complexity: O(n+m)
+
+#### Resources
+- Code: [grid_traveler.py](grid_traveler.py)
+- Unit tests: [tests/test_grid_traveler.py](tests/test_grid_traveler.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_grid_traveler.py
+python -m unittest -v tests.test_grid_traveler
+python -m pytest -v tests/test_grid_traveler.py
+```
 
 ## Part 2. Tabulation
 :soon:
