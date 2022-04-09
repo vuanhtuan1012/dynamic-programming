@@ -162,6 +162,15 @@ def canSum(targetSum: int, numbers: list,
 - Time complexity: O(n*m)
 - Space complexity: O(m)
 
+#### Resources
+- Code: [can_sum.py](can_sum.py)
+- Unit tests: [tests/test_can_sum.py](tests/test_can_sum.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_can_sum.py
+python -m unittest -v tests.test_can_sum
+python -m pytest -v tests/test_can_sum.py
+```
+
 ## Part 2. Tabulation
 :soon:
 
