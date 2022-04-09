@@ -113,6 +113,55 @@ python -m pytest -v tests/test_grid_traveler.py
     - Add a base case to return memo values.
     - Store return values into the memo.
 
+### canSum problem
+> Write a function `canSum(targetSum, numbers)` that takes in a `targetSum` and an array of numbers as arguments.
+> The function should return a boolean indicating whether or not it is possible to generate the `targetSum` using numbers from the array.
+> You may use an element of the array as many times as needed.
+> You may assume that all input numbers are non-negative.
+
+#### Brute force canSum recursive function
+```python
+def canSum(targetSum: int, numbers: list) -> bool:
+    if targetSum == 0:
+        return True
+    if targetSum < 0:
+        return False
+
+    for num in numbers:
+        remainder = targetSum - num
+        if canSum(remainder, numbers):
+            return True
+    return False
+```
+- large of the tree: ```n = len(numbers)```
+- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- Time complexity: O(n<sup>m</sup>)
+- Space complexity: O(m)
+
+#### canSum memorized recursive function
+```python
+def canSum(targetSum: int, numbers: list,
+           memo: Optional[dict] = dict()) -> bool:
+    if targetSum in memo:
+        return memo[targetSum]
+    if targetSum == 0:
+        return True
+    if targetSum < 0:
+        return False
+
+    for num in numbers:
+        remainder = targetSum - num
+        memo[targetSum] = canSum(remainder, numbers, memo)
+        if memo[targetSum] == True:
+            return True
+    memo[targetSum] = False
+    return False
+```
+- large of the tree: ```n = len(numbers)```
+- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- Time complexity: O(n*m)
+- Space complexity: O(m)
+
 ## Part 2. Tabulation
 :soon:
 
