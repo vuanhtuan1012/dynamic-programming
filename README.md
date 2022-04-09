@@ -99,6 +99,20 @@ python -m unittest -v tests.test_grid_traveler
 python -m pytest -v tests/test_grid_traveler.py
 ```
 
+### Memorization recipe
+> This is Alvin's guidelines for solving dynamic programing problems using a memorization strategy.
+
+1. **Make it work**
+    - Visualize the problem as a tree.
+    -  Implement the tree using recursion.
+    - Test it.
+2. **Make it efficient**
+    - Add a memo object:
+        - keys represent arguments to our function, and values represent the return values for those function calls.
+        - make sure memo object is shared among all of the recursive calls.
+    - Add a base case to return memo values.
+    - Store return values into the memo.
+
 ## Part 2. Tabulation
 :soon:
 
