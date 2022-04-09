@@ -173,3 +173,4 @@ def canSum(targetSum: int, numbers: list,
 ## :warning: Notes
 - The directory `tests`  must have file `__init__.py` to call command `pytest -v tests/[filename].py`. If not, you have to call command `python -m pytest -v tests/[filename].py`.
 - The difference between `pytest` and `python -m pytest` is the later adds current directory to `sys.path`.
+- It seems that default dictionary argument which has the same name, but in different calls shares the same region of memory :exclamation: That's why I have to use calls like `canSum(7, [2, 3], dict())` instead of `canSum(7, [2, 3])`.
