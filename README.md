@@ -171,6 +171,65 @@ python -m unittest -v tests.test_can_sum
 python -m pytest -v tests/test_can_sum.py
 ```
 
+### howSum problem
+> Write a function `howSum(targetSum, numbers)` that takes in a `targetSum` and an array of numbers as arguments.
+> The function should return an array containing any combination of elements that add up to exactly the `targetSum`. If there is no combination that adds up to the `targetSum`, then return `null`.
+> If there are multiple combinations possible. you may return any single one.
+
+#### Brute force howSum recursive function
+```python
+def howSum(targetSum: int, numbers: list) -> list:
+    if targetSum == 0:
+        return []
+    if targetSum < 0:
+        return None
+
+    for num in numbers:
+        remainder = targetSum - num
+        res = howSum(remainder, numbers)
+        if res is not None:
+            return [num, *res]
+    return None
+```
+- large of the tree: ```n = len(numbers)```
+- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- Time complexity: O(m*n<sup>m</sup>)
+- Space complexity: O(m)
+
+#### howSum memorized recursive function
+```python
+def howSum(targetSum: int, numbers: list,
+           memo: Optional[dict] = dict()) -> list:
+    if targetSum in memo:
+        return memo[targetSum]
+    if targetSum == 0:
+        return []
+    if targetSum < 0:
+        return None
+
+    for num in numbers:
+        remainder = targetSum - num
+        res = howSum(remainder, numbers, memo)
+        if res is not None:
+            memo[targetSum] = [num, *res]
+            return memo[targetSum]
+    memo[targetSum] = None
+    return None
+```
+- large of the tree: ```n = len(numbers)```
+- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- Time complexity: O(n*m<sup>2</sup>)
+- Space complexity: O(m)
+
+#### Resources
+- Code: [how_sum.py](how_sum.py)
+- Unit tests: [tests/test_how_sum.py](tests/test_how_sum.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_how_sum.py
+python -m unittest -v tests.test_how_sum
+python -m pytest -v tests/test_how_sum.py
+```
+
 ## Part 2. Tabulation
 :soon:
 
