@@ -219,7 +219,7 @@ def howSum(targetSum: int, numbers: list,
 - large of the tree: ```n = len(numbers)```
 - height of the tree: ```m = ceil(targetSum/min(numbers))```
 - Time complexity: O(n*m<sup>2</sup>)
-- Space complexity: O(m)
+- Space complexity: O(m<sup>2</sup>)
 
 #### Resources
 - Code: [how_sum.py](how_sum.py)
