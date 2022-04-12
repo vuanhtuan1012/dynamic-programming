@@ -249,11 +249,10 @@ def bestSum(targetSum: int, numbers: list) -> list:
         res = bestSum(remainder, numbers)
         if res is not None:
             combination = [num, *res]
-            if shortestCombination is None:
+            cond = shortestCombination is None
+            cond = cond or (len(combination) < len(shortestCombination))
+            if cond:
                 shortestCombination = combination
-            else:
-                if len(combination) < len(shortestCombination):
-                    shortestCombination = combination
     return shortestCombination
 ```
 - large of the tree: ```n = len(numbers)```
@@ -278,11 +277,10 @@ def bestSum(targetSum: int, numbers: list,
         res = bestSum(remainder, numbers, memo)
         if res is not None:
             combination = [num, *res]
-            if shortestCombination is None:
+            cond = shortestCombination is None
+            cond = cond or (len(combination) < len(shortestCombination))
+            if cond:
                 shortestCombination = combination
-            else:
-                if len(combination) < len(shortestCombination):
-                    shortestCombination = combination
     memo[targetSum] = shortestCombination
     return memo[targetSum]
 ```

@@ -3,7 +3,7 @@
 # @Date:   2022-04-10 18:39:09
 # @Email:  anh-tuan.vu@outlook.com
 # @Last Modified by:   anh-tuan.vu
-# @Last Modified time: 2022-04-12 03:08:25
+# @Last Modified time: 2022-04-12 06:10:19
 
 from typing import Optional
 from tlib import timer
@@ -24,18 +24,17 @@ def bestSum(targetSum: int, numbers: list,
         res = bestSum(remainder, numbers, memo)
         if res is not None:
             combination = [num, *res]
-            if shortestCombination is None:
+            cond = shortestCombination is None
+            cond = cond or (len(combination) < len(shortestCombination))
+            if cond:
                 shortestCombination = combination
-            else:
-                if len(combination) < len(shortestCombination):
-                    shortestCombination = combination
     memo[targetSum] = shortestCombination
     return memo[targetSum]
 
 
 @timer
 def main():
-    print(bestSum(100, [1, 2, 25]))
+    print(bestSum(100, [1, 2, 5, 25]))
 
 
 if __name__ == '__main__':
