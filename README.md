@@ -134,7 +134,7 @@ def canSum(targetSum: int, numbers: list) -> bool:
     return False
 ```
 - large of the tree: ```n = len(numbers)```
-- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- height of the tree: ```m = ceil(targetSum/min(numbers)) = targetSum``` (_in notion of bigO_)
 - Time complexity: O(n<sup>m</sup>)
 - Space complexity: O(m)
 
@@ -158,7 +158,7 @@ def canSum(targetSum: int, numbers: list,
     return False
 ```
 - large of the tree: ```n = len(numbers)```
-- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- height of the tree: ```m = ceil(targetSum/min(numbers)) = targetSum``` (_in notion of bigO_)
 - Time complexity: O(n*m)
 - Space complexity: O(m)
 
@@ -192,7 +192,7 @@ def howSum(targetSum: int, numbers: list) -> list:
     return None
 ```
 - large of the tree: ```n = len(numbers)```
-- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- height of the tree: ```m = ceil(targetSum/min(numbers)) = targetSum``` (_in notion of bigO_)
 - Time complexity: O(m*n<sup>m</sup>)
 - Space complexity: O(m)
 
@@ -217,7 +217,7 @@ def howSum(targetSum: int, numbers: list,
     return None
 ```
 - large of the tree: ```n = len(numbers)```
-- height of the tree: ```m = ceil(targetSum/min(numbers))```
+- height of the tree: ```m = ceil(targetSum/min(numbers)) = targetSum``` (_in notion of bigO_)
 - Time complexity: O(n*m<sup>2</sup>)
 - Space complexity: O(m<sup>2</sup>)
 
@@ -228,6 +228,76 @@ def howSum(targetSum: int, numbers: list,
 pytest -v tests/test_how_sum.py
 python -m unittest -v tests.test_how_sum
 python -m pytest -v tests/test_how_sum.py
+```
+
+### bestSum problem
+> Write a function `howSum(targetSum, numbers)` that takes in a `targetSum` and an array of numbers as arguments.
+> The function should return an array containing the **shortest** combination of numbers that add up to exactly the `targetSum`.
+> If there is a tie for the shortest combination, you may return any one of the shortest.
+
+#### Brute force bestSum recursive function
+```python
+def bestSum(targetSum: int, numbers: list) -> list:
+    if targetSum == 0:
+        return []
+    if targetSum < 0:
+        return None
+
+    shortestCombination = None
+    for num in numbers:
+        remainder = targetSum - num
+        res = bestSum(remainder, numbers)
+        if res is not None:
+            combination = [num, *res]
+            if shortestCombination is None:
+                shortestCombination = combination
+            else:
+                if len(combination) < len(shortestCombination):
+                    shortestCombination = combination
+    return shortestCombination
+```
+- large of the tree: ```n = len(numbers)```
+- height of the tree: ```m = ceil(targetSum/min(numbers)) = targetSum``` (_in notion of bigO_)
+- Time complexity: O(m*n<sup>m</sup>)
+- Space complexity: O(m)
+
+#### bestSum memorized recursive function
+```python
+def bestSum(targetSum: int, numbers: list,
+            memo: Optional[dict] = dict()) -> list:
+    if targetSum in memo:
+        return memo[targetSum]
+    if targetSum == 0:
+        return []
+    if targetSum < 0:
+        return None
+
+    shortestCombination = None
+    for num in numbers:
+        remainder = targetSum - num
+        res = bestSum(remainder, numbers, memo)
+        if res is not None:
+            combination = [num, *res]
+            if shortestCombination is None:
+                shortestCombination = combination
+            else:
+                if len(combination) < len(shortestCombination):
+                    shortestCombination = combination
+    memo[targetSum] = shortestCombination
+    return memo[targetSum]
+```
+- large of the tree: ```n = len(numbers)```
+- height of the tree: ```m = ceil(targetSum/min(numbers)) = targetSum``` _(in notion of bigO)_
+- Time complexity: O(n*m<sup>2</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### Resources
+- Code: [best_sum.py](best_sum.py)
+- Unit tests: [tests/test_best_sum.py](tests/test_best_sum.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_best_sum.py
+python -m unittest -v tests.test_best_sum
+python -m pytest -v tests/test_best_sum.py
 ```
 
 ## Part 2. Tabulation
