@@ -406,7 +406,7 @@ countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']);  # 2
 countConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']);  # 0
 countConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']);  # 4
 countConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',
-             ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']);  # 0
+               ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']);  # 0
 ```
 
 #### Brute force countConstruct recursive function
