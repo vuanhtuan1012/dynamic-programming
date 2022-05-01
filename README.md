@@ -300,8 +300,8 @@ python -m pytest -v tests/test_best_sum.py
 
 ### canConstruct problem
 > Write a function `canConstruct(target, wordBank)` that accepts a target string and an array of strings.
-> The function should return a boolean indicating whether or not the `target` can be constructed by concatenating elements of the `wordBanks` array.
-> You may reuse an element of `wordBanks` as many times as needed.
+> The function should return a boolean indicating whether or not the `target` can be constructed by concatenating elements of the `wordBank` array.
+> You may reuse an element of `wordBank` as many times as needed.
 
 Test cases:
 ```python
