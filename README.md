@@ -394,6 +394,69 @@ python -m unittest -v tests.test_can_construct
 python -m pytest -v tests/test_can_construct.py
 ```
 
+### countConstruct problem
+> Write a function `countConstruct(target, wordBank)` that accepts a target string and an array of strings.
+> The function should return the number of ways that the `target` can be constructed by concatenating elements of the `wordBank` array.
+> You may reuse an element of `wordBank` as many times as needed.
+
+Test cases:
+```python
+countConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']);  # 1
+countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']);  # 2
+countConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']);  # 0
+countConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']);  # 4
+countConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',
+             ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']);  # 0
+```
+
+#### Brute force countConstruct recursive function
+```python
+def countConstruct(target: str, wordBank: list) -> bool:
+    if target == '':
+        return 1
+    nb_of_ways = 0
+    for word in wordBank:
+        if target.find(word) == 0:
+            suffix = target[len(word):]
+            if countConstruct(suffix, wordBank):
+                nb_of_ways += 1
+    return nb_of_ways
+```
+- large of the tree: ```n = len(wordBank)```
+- height of the tree: ```m = len(target)``` (_in notion of bigO_)
+- Time complexity: O(m*n<sup>m</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### canConstruct memorized recursive function
+```python
+def countConstruct(target: str, wordBank: list,
+                   memo: Optional[dict] = dict()) -> int:
+    if target in memo:
+        return memo[target]
+    if target == '':
+        return 1
+    nb_of_ways = 0
+    for word in wordBank:
+        if target.find(word) == 0:
+            suffix = target[len(word):]
+            nb_of_ways += countConstruct(suffix, wordBank, memo)
+    memo[target] = nb_of_ways
+    return memo[target]
+```
+- large of the tree: ```n = len(wordBank)```
+- height of the tree: ```m = len(target)``` (_in notion of bigO_)
+- Time complexity: O(n*m<sup>2</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### Resources
+- Code: [count_construct.py](count_construct.py)
+- Unit tests: [tests/test_count_construct.py](tests/test_count_construct.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_count_construct.py
+python -m unittest -v tests.test_count_construct
+python -m pytest -v tests/test_count_construct.py
+```
+
 ## Part 2. Tabulation
 :soon:
 
