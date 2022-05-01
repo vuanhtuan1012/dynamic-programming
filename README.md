@@ -374,7 +374,7 @@ def canConstruct(target: str, wordBank: list,
     for word in wordBank:
         if target.find(word) == 0:
             suffix = target[len(word):]
-            if canConstruct(suffix, wordBank):
+            if canConstruct(suffix, wordBank, memo):
                 memo[target] = True
                 return memo[target]
     memo[target] = False
