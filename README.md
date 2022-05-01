@@ -59,6 +59,14 @@ python -m pytest -v tests/test_fib.py
 > In how many ways can you travel to the goal on a grid with dimensions m*n ?
 > Write a function `gridTraveler(m, n)`  that calculates this.
 
+Test cases:
+```python
+gridTraveler(1, 1)   # 1
+gridTraveler(2, 3)   # 3
+gridTraveler(3, 2)   # 3
+gridTraveler(3, 3)   # 6
+```
+
 #### Brute force gridTraveler recursive function
 ```python
 def gridTraveler(m: int, n: int) -> int:
@@ -119,6 +127,15 @@ python -m pytest -v tests/test_grid_traveler.py
 > You may use an element of the array as many times as needed.
 > You may assume that all input numbers are non-negative.
 
+Test cases:
+```python
+canSum(7, [2, 3])   # True
+canSum(7, [5, 3, 4, 7])   # True
+canSum(7, [2, 4])   # False
+canSum(8, [2, 3, 5])   # True
+canSum(300, [7, 14])   # False
+```
+
 #### Brute force canSum recursive function
 ```python
 def canSum(targetSum: int, numbers: list) -> bool:
@@ -175,6 +192,15 @@ python -m pytest -v tests/test_can_sum.py
 > Write a function `howSum(targetSum, numbers)` that takes in a `targetSum` and an array of numbers as arguments.
 > The function should return an array containing any combination of elements that add up to exactly the `targetSum`. If there is no combination that adds up to the `targetSum`, then return `null`.
 > If there are multiple combinations possible. you may return any single one.
+
+Test cases:
+```python
+howSum(7, [2, 3])   # [2, 2, 3]
+howSum(7, [5, 3, 4, 7])   # [3, 4]
+howSum(7, [2, 4])   # None
+howSum(8, [2, 3, 5])   # [2, 2, 2, 2]
+howSum(300, [7, 14])   # None
+```
 
 #### Brute force howSum recursive function
 ```python
@@ -234,6 +260,14 @@ python -m pytest -v tests/test_how_sum.py
 > Write a function `bestSum(targetSum, numbers)` that takes in a `targetSum` and an array of numbers as arguments.
 > The function should return an array containing the **shortest** combination of numbers that add up to exactly the `targetSum`.
 > If there is a tie for the shortest combination, you may return any one of the shortest.
+
+Test cases:
+```python
+bestSum(7, [5, 3, 4, 7])   # [7]
+bestSum(8, [2, 3, 5])   # [3, 5]
+bestSum(8, [1, 4, 5])   # [4, 4]
+bestSum(100, [1, 2, 5, 25])   # [25, 25, 25, 25]
+```
 
 #### Brute force bestSum recursive function
 ```python
