@@ -3,14 +3,14 @@
 # @Date:   2022-04-30 07:59:13
 # @Email:  anh-tuan.vu@outlook.com
 # @Last Modified by:   anh-tuan.vu
-# @Last Modified time: 2022-05-01 18:58:49
+# @Last Modified time: 2022-05-01 19:44:26
 
 from typing import Optional
 from tlib import timer
 
 
 def canConstruct(target: str, wordBank: list,
-                 memo: Optional[dict] = {}) -> bool:
+                 memo: Optional[dict] = dict()) -> bool:
     if target in memo:
         return memo[target]
     if target == '':
