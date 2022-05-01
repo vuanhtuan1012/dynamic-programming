@@ -3,13 +3,13 @@
 # @Date:   2022-05-01 02:11:26
 # @Email:  anh-tuan.vu@outlook.com
 # @Last Modified by:   anh-tuan.vu
-# @Last Modified time: 2022-05-01 02:26:35
+# @Last Modified time: 2022-05-01 19:48:27
 
 import unittest
 from can_construct import canConstruct
 
 
-class BestSum(unittest.TestCase):
+class CanConstruct(unittest.TestCase):
     def test_canConstruct_case1(self):
         self.assertEqual(canConstruct('abcdef',
                                       ['ab', 'abc', 'cd', 'def', 'abcd'],
