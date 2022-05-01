@@ -3,7 +3,7 @@
 # @Date:   2022-04-30 07:59:13
 # @Email:  anh-tuan.vu@outlook.com
 # @Last Modified by:   anh-tuan.vu
-# @Last Modified time: 2022-05-01 02:03:34
+# @Last Modified time: 2022-05-01 02:37:10
 
 from typing import Optional
 from tlib import timer
@@ -27,8 +27,6 @@ def canConstruct(target: str, wordBank: list,
 
 @timer
 def main():
-    target = 'skateboard'
-    wordBank = ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']
     target = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef'
     wordBank = ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']
     print(canConstruct(target, wordBank))
