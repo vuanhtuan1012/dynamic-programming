@@ -298,6 +298,68 @@ python -m unittest -v tests.test_best_sum
 python -m pytest -v tests/test_best_sum.py
 ```
 
+### canConstruct problem
+> Write a function `canConstruct(target, wordBank)` that accepts a target string and an array of strings.
+> The function should return a boolean indicating whether or not the `target` can be constructed by concatenating elements of the `wordBanks` array.
+> You may reuse an element of `wordBanks` as many times as needed.
+
+Test cases:
+```python
+canConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']);  # True
+canConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']);  # False
+canConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']);  # True
+canConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',
+             ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']);  # False
+```
+
+#### Brute force canConstruct recursive function
+```python
+def canConstruct(target: str, wordBank: list) -> bool:
+    if target == '':
+        return True
+    for word in wordBank:
+        if target.find(word) == 0:
+            suffix = target[len(word):]
+            if canConstruct(suffix, wordBank):
+                return True
+    return False
+```
+- large of the tree: ```n = len(wordBank)```
+- height of the tree: ```m = len(target)``` (_in notion of bigO_)
+- Time complexity: O(m*n<sup>m</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### canConstruct memorized recursive function
+```python
+def canConstruct(target: str, wordBank: list,
+                 memo: Optional[dict] = {}) -> bool:
+    if target in memo:
+        return memo[target]
+    if target == '':
+        return True
+    for word in wordBank:
+        if target.find(word) == 0:
+            suffix = target[len(word):]
+            if canConstruct(suffix, wordBank):
+                memo[target] = True
+                return memo[target]
+    memo[target] = False
+    return memo[target]
+```
+- large of the tree: ```n = len(wordBank)```
+- height of the tree: ```m = len(target)``` (_in notion of bigO_)
+- Time complexity: O(n*m<sup>2</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### Resources
+- Code: [can_construct.py](can_construct.py)
+- Unit tests: [tests/test_can_construct.py](tests/test_can_construct.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_can_construct.py
+python -m unittest -v tests.test_can_construct
+python -m pytest -v tests/test_can_construct.py
+```
+
 ## Part 2. Tabulation
 :soon:
 
