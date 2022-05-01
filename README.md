@@ -427,7 +427,7 @@ def countConstruct(target: str, wordBank: list) -> bool:
 - Time complexity: O(m*n<sup>m</sup>)
 - Space complexity: O(m<sup>2</sup>)
 
-#### canConstruct memorized recursive function
+#### countConstruct memorized recursive function
 ```python
 def countConstruct(target: str, wordBank: list,
                    memo: Optional[dict] = dict()) -> int:
