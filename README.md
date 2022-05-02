@@ -339,11 +339,11 @@ python -m pytest -v tests/test_best_sum.py
 
 Test cases:
 ```python
-canConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']);  # True
-canConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']);  # False
-canConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']);  # True
+canConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd'])  # True
+canConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])  # False
+canConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't'])  # True
 canConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',
-             ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']);  # False
+             ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])  # False
 ```
 
 #### Brute force canConstruct recursive function
@@ -401,12 +401,12 @@ python -m pytest -v tests/test_can_construct.py
 
 Test cases:
 ```python
-countConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']);  # 1
-countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']);  # 2
-countConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']);  # 0
-countConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't']);  # 4
+countConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd'])  # 1
+countConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])  # 2
+countConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])  # 0
+countConstruct('enterapotentpot', ['a', 'p', 'ent', 'enter', 'ot', 'o', 't'])  # 4
 countConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',
-               ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee']);  # 0
+               ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])  # 0
 ```
 
 #### Brute force countConstruct recursive function
@@ -456,6 +456,72 @@ pytest -v tests/test_count_construct.py
 python -m unittest -v tests.test_count_construct
 python -m pytest -v tests/test_count_construct.py
 ```
+
+### allConstruct problem
+> Write a function `allConstruct(target, wordBank)` that accepts a target string and an array of strings.
+> The function should return a 2D array containing all of the ways that the `target` can be constructed by concatenating elements of the `wordBank` array. Each element of the 2D array should represent one combination that constructs the `target`.
+> You may reuse an element of `wordBank` as many times as needed.
+
+Test cases:
+```python
+allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])  # [['purp', 'le'], ['p', 'ur', 'p', 'le']]
+allConstruct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c'])  # [['ab', 'cd', 'ef'], ['ab', 'c', 'def'], ['abc', 'def'], ['abcd', 'ef']]
+allConstruct('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar'])  # []
+allConstruct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef',
+             ['e', 'ee', 'eee', 'eeee', 'eeeee', 'eeeeee'])  # []
+```
+
+#### Brute force allConstruct recursive function
+```python
+def allConstruct(target: str, wordBank: list) -> list:
+    if target == '':
+        return [[]]
+    result = list()
+    for word in wordBank:
+        if target.find(word) == 0:
+            suffix = target[len(word):]
+            suffix_ways = allConstruct(suffix, wordBank)
+            target_ways = map(lambda way: [word, *way], suffix_ways)
+            result.extend(target_ways)
+    return result
+```
+- large of the tree: ```n = len(wordBank)```
+- height of the tree: ```m = len(target)``` (_in notion of bigO_)
+- Time complexity: O(m*n<sup>m</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### allConstruct memorized recursive function
+```python
+def allConstruct(target: str, wordBank: list,
+                 memo: Optional[dict] = {}) -> list:
+    if target in memo:
+        return memo[target]
+    if target == '':
+        return [[]]
+    result = list()
+    for word in wordBank:
+        if target.find(word) == 0:
+            suffix = target[len(word):]
+            suffix_ways = allConstruct(suffix, wordBank, memo)
+            target_ways = map(lambda way: [word, *way], suffix_ways)
+            result.extend(target_ways)
+    memo[target] = result
+    return memo[target]
+```
+- large of the tree: ```n = len(wordBank)```
+- height of the tree: ```m = len(target)``` (_in notion of bigO_)
+- Time complexity: O(n*m<sup>2</sup>)
+- Space complexity: O(m<sup>2</sup>)
+
+#### Resources
+- Code: [all_construct.py](all_construct.py)
+- Unit tests: [tests/test_all_construct.py](tests/test_all_construct.py). To run tests, in the root directory use one of these commands below
+```sh
+pytest -v tests/test_all_construct.py
+python -m unittest -v tests.test_all_construct
+python -m pytest -v tests/test_all_construct.py
+```
+
 
 ## Part 2. Tabulation
 :soon:
